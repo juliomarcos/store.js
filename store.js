@@ -47,7 +47,11 @@
 			storage.setItem(key, store.serialize(val))
 			return val
 		}
-		store.get = function(key) { return store.deserialize(storage.getItem(key)) }
+		store.get = function(key, def) { 
+			var storaged_value = store.deserialize(storage.getItem(key));
+			if (storaged_value == undefined) return def;
+			return storaged_value;
+		}
 		store.remove = function(key) { storage.removeItem(key) }
 		store.clear = function() { storage.clear() }
 		store.getAll = function() {
